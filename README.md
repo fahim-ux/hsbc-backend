@@ -1,18 +1,154 @@
-# HSBC Banking Backend API
+# HSBC Banking System - Complete Full-Stack Application
 
-A comprehensive banking assistant backend built with TypeScript, Fastify, and SQLite. This API provides JWT-based authentication and all essential banking operations for a digital banking assistant.
+A comprehensive AI-powered banking assistant with both backend API and frontend chat interface. Built with TypeScript, Fastify, Next.js, and Google Gemini AI for intelligent conversational banking.
 
-## Features
+## 🏗️ System Architecture
 
-- **JWT Authentication** - Secure session-based authentication
-- **Account Management** - Balance inquiry, account details, mini statements
-- **Card Operations** - Block/unblock cards, request new cards
-- **Loan Services** - Apply for loans, check loan status
-- **Money Transfer** - Send money, transaction history, cancel transactions
-- **Customer Support** - Raise complaints, track complaint status
-- **General Services** - View offers, find branches/ATMs
+### Backend (Port 8080)
+- **Fastify + TypeScript** - High-performance REST API
+- **JWT Authentication** - Secure session management  
+- **SQLite Database** - Local banking data storage
+- **RAG Vector Search** - AI-powered document search
+- **15+ Banking APIs** - Complete banking operations
 
-## API Endpoints
+### Frontend (Port 3000)
+- **Next.js 15.4.4 + React 19** - Modern web interface
+- **Google Gemini AI** - Conversational banking assistant
+- **Real-time Chat** - Interactive banking conversations
+- **Function Calling** - AI-driven banking operations
+- **Responsive Design** - Mobile-first banking interface
+
+## 🚀 Complete Setup Guide
+
+### 1. Clone the Repository
+```bash
+git clone <repository-url>
+cd hsbc-backend
+```
+
+### 2. Backend Setup
+
+#### Install Dependencies
+```bash
+npm install
+```
+
+#### Environment Configuration
+Create `.env` file in the root directory:
+```env
+# Server Configuration
+PORT=8080
+HOST=0.0.0.0
+NODE_ENV=development
+
+# Authentication
+JWT_SECRET=your-super-secure-jwt-secret-key-here-minimum-32-characters
+
+# CORS Settings
+CORS_ORIGIN=*
+
+# API Configuration
+API_PREFIX=/api/v1
+```
+
+#### Start Backend Server
+```bash
+# Development mode (recommended)
+npm run dev
+
+# Or production mode
+npm run build
+npm start
+```
+
+✅ **Backend Ready**: `http://localhost:8080`
+📚 **API Documentation**: `http://localhost:8080/documentation`
+
+### 3. Frontend Setup
+
+#### Navigate to Frontend Directory
+```bash
+cd frontend
+```
+
+#### Install Frontend Dependencies
+```bash
+npm install
+```
+
+#### Frontend Environment Configuration
+Create `.env.local` file in the `frontend` directory:
+```env
+# Google AI (Gemini) API Key - Required for AI chat
+NEXT_PUBLIC_GEMINI_API_KEY=your_google_gemini_api_key_here
+
+# Backend API Base URL
+NEXT_PUBLIC_API_BASE_URL=http://localhost:8080/api/v1
+
+# Feature Flags
+NEXT_PUBLIC_ENABLE_MOCK_DATA=false
+```
+
+#### Get Google Gemini API Key
+1. Visit [Google AI Studio](https://aistudio.google.com/app/apikey)
+2. Sign in with Google account
+3. Click "Create API Key"
+4. Copy the API key to your `.env.local` file
+
+#### Start Frontend Application
+```bash
+# Development mode
+npm run dev
+
+# Or production mode
+npm run build
+npm start
+```
+
+✅ **Frontend Ready**: `http://localhost:3000`
+
+## 🧪 Testing the Complete System
+
+### Test Credentials
+```
+Username: john_doe
+Password: password
+Account: ACC001
+Balance: $10,000
+
+Username: jane_smith  
+Password: password
+Account: ACC002
+Balance: $25,000
+```
+
+### Quick Test Steps
+
+1. **Open Frontend**: Navigate to `http://localhost:3000`
+2. **Login**: Use test credentials above
+3. **Start Chatting**: Try these sample requests:
+   - "What's my account balance?"
+   - "I want to apply for a personal loan"
+   - "Send $500 to account ACC002"
+   - "Block my card"
+   - "Show me recent transactions"
+   - "What types of loans do you offer?"
+
+### Manual API Testing
+```bash
+# Test login
+curl -X POST http://localhost:8080/api/v1/auth/login \
+  -H "Content-Type: application/json" \
+  -d '{"username": "john_doe", "password": "password"}'
+
+# Test balance (replace TOKEN with JWT from login response)
+curl -X GET http://localhost:8080/api/v1/account/balance \
+  -H "Authorization: Bearer TOKEN"
+```
+
+## 📱 Available Features
+
+### Backend API Endpoints
 
 | Feature | Endpoint | Method | Purpose |
 |---------|----------|--------|---------|
@@ -44,104 +180,216 @@ A comprehensive banking assistant backend built with TypeScript, Fastify, and SQ
 | List Branches | `/api/v1/branches` | GET | Nearest ATMs/branches |
 | Health Check | `/api/v1/health` | GET | API health status |
 
-## Quick Start
+| **RAG System** | | | |
+| Upload Documents | `/api/v1/rag/documents` | POST | Add documents to vector DB |
+| Search Context | `/api/v1/rag/search` | POST | Semantic search for banking info |
+| Get Statistics | `/api/v1/rag/stats` | GET | Vector database statistics |
+| Delete Documents | `/api/v1/rag/documents` | DELETE | Remove specific documents |
+| Clear Database | `/api/v1/rag/all` | DELETE | Clear entire vector database |
 
-### Prerequisites
+### Frontend Chat Features
+- **AI-Powered Conversations** - Natural language banking interactions
+- **Intent Detection** - Automatic recognition of banking requests
+- **Function Calling** - AI directly executes banking operations
+- **Context Management** - Maintains conversation state and history
+- **Real-time Responses** - Immediate feedback for all operations
+- **Quick Actions** - Pre-defined banking shortcuts
+- **Responsive Design** - Works on desktop and mobile devices
 
-- Node.js 18+ 
-- npm or yarn
+## 🔧 Development Commands
 
-### Installation
+### Backend Commands
+```bash
+npm run dev          # Start development server with hot reload
+npm run build        # Build TypeScript to JavaScript
+npm start           # Start production server
+npm run test        # Run test suite (if available)
+npm run lint        # Run ESLint
+```
 
-1. Clone the repository:
-\`\`\`bash
-git clone <repository-url>
-cd hsbc-backend
-\`\`\`
+### Frontend Commands (in frontend/ directory)
+```bash
+npm run dev          # Start Next.js development server
+npm run build        # Build production bundle
+npm start           # Start production server
+npm run lint        # Run ESLint
+npm run type-check   # TypeScript type checking
+```
 
-2. Install dependencies:
-\`\`\`bash
-npm install
-\`\`\`
+## 🔐 Security Features
 
-3. Set up environment variables:
-\`\`\`bash
-cp .env.example .env
-\`\`\`
+- **JWT Authentication** - Secure token-based authentication
+- **Password Hashing** - bcrypt for secure password storage
+- **Protected Routes** - Authentication middleware for all banking operations
+- **CORS Configuration** - Configurable cross-origin request handling
+- **Input Validation** - Joi schema validation for all API inputs
+- **Error Handling** - Sanitized error responses without sensitive data
 
-4. Start the development server:
-\`\`\`bash
+## 🗄️ Database Schema
+
+### SQLite Tables
+- **users** - User authentication and profile data
+- **accounts** - Account information and balances
+- **transactions** - Transaction history and status
+- **cards** - Card details and status
+- **loans** - Loan applications and status
+- **complaints** - Support tickets and tracking
+- **offers** - Banking offers and promotions
+- **branches** - Branch locations and services
+
+### Vector Database (JSON)
+- **Document Chunks** - Processed text segments with embeddings
+- **Metadata** - Document categories and processing information
+- **Search Index** - Optimized for cosine similarity search
+
+## 🚀 Deployment
+
+### Production Environment Variables
+
+#### Backend (.env)
+```env
+NODE_ENV=production
+PORT=8080
+HOST=0.0.0.0
+JWT_SECRET=super-secure-production-jwt-secret-minimum-32-characters
+CORS_ORIGIN=https://your-frontend-domain.com
+```
+
+#### Frontend (.env.local)
+```env
+NEXT_PUBLIC_GEMINI_API_KEY=your_production_gemini_api_key
+NEXT_PUBLIC_API_BASE_URL=https://your-backend-domain.com/api/v1
+NEXT_PUBLIC_ENABLE_MOCK_DATA=false
+```
+
+### Docker Deployment (Optional)
+```dockerfile
+# Backend Dockerfile
+FROM node:18-alpine
+WORKDIR /app
+COPY package*.json ./
+RUN npm install --production
+COPY . .
+RUN npm run build
+EXPOSE 8080
+CMD ["npm", "start"]
+```
+
+## 🧪 Testing & Validation
+
+### Automated Testing Scripts
+```bash
+# Test authentication and basic operations
+npx tsx test-auth-and-doc.ts
+
+# Test RAG system with document processing
+npx tsx create-embeddings.ts
+
+# Test complete RAG workflow
+npx tsx test-rag.ts
+
+# Test login functionality
+npx tsx test-login.ts
+```
+
+### Health Checks
+- **Backend Health**: `GET http://localhost:8080/api/v1/health`
+- **Frontend Status**: `GET http://localhost:3000`
+- **Database Status**: Automatic validation on server startup
+- **AI Integration**: Validated during first chat interaction
+
+## 📋 Troubleshooting
+
+### Common Issues
+
+#### Backend Won't Start
+```bash
+# Check if port 8080 is available
+netstat -an | findstr :8080
+
+# Clear database and restart (Windows)
+Remove-Item -Path "banking.db" -Force
 npm run dev
-\`\`\`
+```
 
-The server will start on `http://localhost:3000`
+#### Frontend Can't Connect to Backend
+1. Verify backend is running on `http://localhost:8080`
+2. Check `NEXT_PUBLIC_API_BASE_URL` in `.env.local`
+3. Verify CORS settings in backend `.env`
 
-### Build and Production
+#### Login Fails
+1. Ensure database has been recreated with correct password hashes
+2. Try test credentials: `john_doe` / `password`
+3. Check browser console for authentication errors
 
-\`\`\`bash
-# Build the project
-npm run build
+#### AI Chat Not Working
+1. Verify `NEXT_PUBLIC_GEMINI_API_KEY` is set correctly
+2. Check Google AI Studio API key is active
+3. Ensure backend RAG endpoints are accessible
 
-# Start production server
-npm start
-\`\`\`
+## 📚 Documentation
 
-## Authentication
+### Available Documentation Files
+- `COMPLETE-SYSTEM-DOCUMENTATION.md` - Comprehensive system architecture
+- `SYSTEM-DOCUMENTATION.md` - Detailed API and component documentation
+- `API_DOCUMENTATION.md` - API endpoint specifications
+- `FRONTEND_API_SPECIFICATION.md` - Frontend integration guide
 
-All endpoints (except login and health check) require JWT authentication. Include the token in the Authorization header:
+### Interactive Documentation
+- **Swagger UI**: `http://localhost:8080/documentation`
+- **API Testing**: Built-in request/response testing
+- **Schema Validation**: Live API validation and examples
 
-\`\`\`
-Authorization: Bearer <your-jwt-token>
-\`\`\`
+## 🤝 Contributing
 
-### Default Test Users
+1. Fork the repository
+2. Create feature branch: `git checkout -b feature/new-feature`
+3. Commit changes: `git commit -am 'Add new feature'`
+4. Push to branch: `git push origin feature/new-feature`
+5. Submit pull request
 
-The system comes with pre-configured test users:
+## 📄 License
 
-| Username | Password | Account Number | Balance |
-|----------|----------|----------------|---------|
-| john_doe | password123 | ACC001 | $10,000 |
-| jane_smith | password123 | ACC002 | $25,000 |
+This project is part of the HSBC Hackathon submission.
 
-## API Documentation
+---
 
-Once the server is running, visit:
-- Swagger UI: `http://localhost:3000/documentation`
-- API Root: `http://localhost:3000`
+## Quick Reference
 
-## Example Usage
+### System URLs
+- **Backend API**: `http://localhost:8080`
+- **Frontend App**: `http://localhost:3000`
+- **API Documentation**: `http://localhost:8080/documentation`
+- **Health Check**: `http://localhost:8080/api/v1/health`
 
-### 1. Login
-\`\`\`bash
-curl -X POST http://localhost:3000/api/v1/auth/login \\
-  -H "Content-Type: application/json" \\
-  -d '{
-    "username": "john_doe",
-    "password": "password123"
-  }'
-\`\`\`
+### Test Credentials
+```
 
-### 2. Get Account Balance
-\`\`\`bash
-curl -X GET http://localhost:3000/api/v1/account/balance \\
-  -H "Authorization: Bearer <your-jwt-token>"
-\`\`\`
+### Sample Conversation Examples
+Try these natural language requests in the frontend chat:
+- "What's my current balance?"
+- "I need to apply for a home loan for $200,000"
+- "Send $1,000 to account ACC002 for rent payment"
+- "My card is lost, please block it"
+- "Show me my last 5 transactions"
+- "What are the interest rates for personal loans?"
+- "I have a problem with my online banking"
 
-### 3. Send Money
-\`\`\`bash
-curl -X POST http://localhost:3000/api/v1/transaction/send \\
-  -H "Authorization: Bearer <your-jwt-token>" \\
-  -H "Content-Type: application/json" \\
-  -d '{
-    "toAccountNumber": "ACC002",
-    "amount": 100,
-    "description": "Transfer to Jane"
-  }'
-\`\`\`
+### System Status
+- ✅ **Backend**: REST API with 20+ endpoints
+- ✅ **Frontend**: AI-powered chat interface  
+- ✅ **Authentication**: JWT-based security
+- ✅ **RAG System**: Vector search with 15 document chunks
+- ✅ **Database**: SQLite with sample banking data
+- ✅ **AI Integration**: Google Gemini with function calling
 
-### 4. Block a Card
-\`\`\`bash
-curl -X POST http://localhost:3000/api/v1/card/block \\
+---
+
+**🏗️ System Architecture**: Full-stack TypeScript application  
+**🤖 AI Engine**: Google Gemini 2.5 Flash with RAG capabilities  
+**🔐 Security**: JWT authentication with bcrypt password hashing  
+**📱 Interface**: Responsive chat-based banking assistant  
+**🚀 Deployment**: Ready for production with Docker support
   -H "Authorization: Bearer <your-jwt-token>" \\
   -H "Content-Type: application/json" \\
   -d '{

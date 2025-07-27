@@ -3,7 +3,7 @@
  * Shows how to use the banking chat integration
  */
 
-import React from 'react';
+import React from 'react' ;
 import { BankingChatIntegration } from '@/services/bankingChatIntegration';
 import { BankingToolsIntegration, defaultBankingTools } from '@/services/bankingToolsIntegration';
 

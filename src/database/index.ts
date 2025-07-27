@@ -162,16 +162,16 @@ export class Database {
 
       console.log('Inserting sample data...');
 
-      // Sample users
+      // Sample users (password is 'password' for both)
       await run(`
         INSERT INTO users (id, username, password, email, fullName, phoneNumber, accountNumber, balance)
         VALUES 
           (?, ?, ?, ?, ?, ?, ?, ?),
           (?, ?, ?, ?, ?, ?, ?, ?)
       `, [
-        'user-1', 'john_doe', '$2a$10$N9qo8uLOickgx2ZMRZoMye1IVI9gWWFl8Z9zPPJHPJM0pNLJYF6.K', 
+        'user-1', 'john_doe', '$2a$10$2NE0r3.bJsW1tZPD7w0VLuV33V04Dt38TICVI/RB1rDBIo.OYhKx.', 
         'john@example.com', 'John Doe', '1234567890', 'ACC001', 10000,
-        'user-2', 'jane_smith', '$2a$10$N9qo8uLOickgx2ZMRZoMye1IVI9gWWFl8Z9zPPJHPJM0pNLJYF6.K', 
+        'user-2', 'jane_smith', '$2a$10$2NE0r3.bJsW1tZPD7w0VLuV33V04Dt38TICVI/RB1rDBIo.OYhKx.', 
         'jane@example.com', 'Jane Smith', '0987654321', 'ACC002', 25000
       ]);
 
