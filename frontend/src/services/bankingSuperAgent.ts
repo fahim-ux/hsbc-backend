@@ -49,10 +49,10 @@ export class BankingSuperAgent {
   private functionMap: Record<string, (task: BankingTask, context: BankingContext) => Promise<any>> = {};
 
   constructor(apiKey?: string) {
-    const key = apiKey || 'AIzaSyAabtfY2bpIhgpZJUMaTCI6mZrI-rzl6e0';
+    const key = apiKey || process.env.NEXT_PUBLIC_GEMINI_API_KEY;
     
     if (!key) {
-      throw new Error('Google AI API key not provided');
+      throw new Error('Google AI API key not provided. Please set NEXT_PUBLIC_GEMINI_API_KEY in your .env.local file');
     }
 
     this.genai = new GoogleGenAI({

@@ -10,7 +10,12 @@ import { BankingToolsIntegration, defaultBankingTools } from '@/services/banking
 // ===== EXAMPLE 1: Simple Banking Chat Integration =====
 
 export async function createBankingChatDemo() {
-  const bankingChat = new BankingChatIntegration('AIzaSyAabtfY2bpIhgpZJUMaTCI6mZrI-rzl6e0');
+  const apiKey = process.env.NEXT_PUBLIC_GEMINI_API_KEY;
+  if (!apiKey) {
+    throw new Error('NEXT_PUBLIC_GEMINI_API_KEY not found in environment variables');
+  }
+  
+  const bankingChat = new BankingChatIntegration(apiKey);
   
   // Enable mock data for demo
   bankingChat.setMockDataEnabled(true);
